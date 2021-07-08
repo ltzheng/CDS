@@ -22,6 +22,8 @@ def get_common_args():
                         help='the model directory of the policy')
     parser.add_argument('--result_dir', type=str, default='./result',
                         help='the result directory of the policy')
+    parser.add_argument('--board_dir', type=str, default='./tensorboard',
+                        help='the directory of tensorboard curves')
 
     parser.add_argument('--learn', type=bool, default=True,
                         help='whether to train the model')

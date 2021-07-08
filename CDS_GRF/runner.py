@@ -101,6 +101,8 @@ class Runner:
         self.args = args
         self.save_path = f'{self.args.result_dir}'
 
+        self.writer = SummaryWriter(self.args.board_dir)
+
         for item_file in [self.save_path, self.csv_dir]:
             if not os.path.exists(item_file):
                 os.makedirs(item_file)
@@ -161,6 +163,9 @@ class Runner:
                 episode_rewards.append(episode_reward)
                 self.writereward(self.csv_path, episode_reward, self.all_steps)
                 self.writereward(self.win_path, win_rate, self.all_steps)
+
+                self.writer.add_scalar('Episode reward', episode_reward, epoch)
+                self.writer.add_scalar('Win rate', win_rate, epoch)
 
     def evaluate(self):
         win_number = 0
